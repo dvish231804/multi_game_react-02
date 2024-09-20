@@ -1,5 +1,6 @@
 import React from "react";
 import HomeHeader from "../components/Header/HomeHeader";
+import Colors from "../components/color";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       </div> */}
       {/* <!-- preloader area end --> */}
 
-      <div className="container">
+      <div className="container" >
         <div className="main-home-area">
           <HomeHeader />
 
@@ -50,7 +51,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="container mt-4">
+          <div className="container mt-4" >
             <div className="row justify-content-center">
               {/* <!-- Fishing Card --> */}
               <div className="col-6">
