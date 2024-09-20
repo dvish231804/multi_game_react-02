@@ -1,8 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Games from './pages/Games';
+import Activities from './pages/Activities';
+import Accounts from './pages/Accounts';
 
 function App() {
-  return <div className="App">Hello Flicker Family</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/game" element={<Games/>} />
+        <Route path="/activity" element={<Activities/>} />
+        <Route path="/account" element={<Accounts/>} />
+
+
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
