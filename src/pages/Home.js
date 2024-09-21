@@ -1,6 +1,9 @@
 import React from "react";
 import HomeHeader from "../components/Header/HomeHeader";
-import Colors from "../components/color";
+import Card from "../components/Card";
+import Card2 from "../components/Card2";
+import PlayerList from "../components/Homelist/PlayerList";
+// import Colors from "../components/color";
 
 export default function Home() {
   return (
@@ -50,74 +53,51 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div className="container mt-4" >
-            <div className="row justify-content-center">
-              {/* <!-- Fishing Card --> */}
-              <div className="col-6">
-                <div className="card text-center bg-transparent border-0">
-                  <div className="card-body p-4">
-                    <img
-                      src="assets/img/banner/tic.jpg"
-                      className="img-fluid"
-                      alt="Fishing Image"
-                    />
-                    <h6 className="mt-3">Tic-Tac-toe</h6>
-                    {/* <!-- <p className="card-text">Explore the world of fishing.</p> --> */}
-                  </div>
-                </div>
-              </div>
-
-              {/* <!-- Original Card --> */}
-              <div className="col-6">
-                <div className="card text-center bg-transparent border-0">
-                  <div className="card-body p-4">
-                    <img
-                      src="assets/img/banner/slots.jpeg"
-                      className="img-fluid"
-                      alt="Original Image"
-                    />
-                    <h6 className="mt-3">Slots</h6>
-                    {/* <!-- <p className="card-text">Discover the original classNameics.</p> --> */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="container mt-4">
-            <div className="row justify-content-center">
-              {/* <!-- Fishing Card --> */}
-              <div className="col-6">
-                <div className="card text-center bg-transparent border-0">
-                  <div className="card-body p-4">
-                    <img
-                      src="assets/img/banner/tic.jpg"
-                      className="img-fluid"
-                      alt="Fishing Image"
-                    />
-                    <h6 className="mt-3">Fishing</h6>
-                    {/* <!-- <p className="card-text">Explore the world of fishing.</p> --> */}
-                  </div>
-                </div>
-              </div>
-
-              {/* <!-- Original Card --> */}
-              <div className="col-6">
-                <div className="card text-center bg-transparent border-0">
-                  <div className="card-body p-4">
-                    <img
-                      src="assets/img/banner/pilot.jpg"
-                      className="img-fluid"
-                      alt="Original Image"
-                    />
-                    <h6 className="mt-3">Original</h6>
-                    {/* <!-- <p className="card-text">Discover the original classNameics.</p> --> */}
+          <Card />
+          <Card2 />
+          <PlayerList />
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-8">
+                <h4 class="mb-4 mt-4 text-center">Top-3 Winners</h4>
+                <div id="topPlayersList">
+                  <div class="players-wrapper">
+                    <div class="player-card">
+                      <div class="rank-badge">#3</div>
+                      <img src="https://via.placeholder.com/100" alt="Player 3" class="profile-image" />
+                      <div class="card-content">
+                        <div class="player-name">Player 3</div>
+                        <div class="player-winnings">$ 8000 </div>
+                        <div class="stars">⭐⭐⭐</div>
+                      </div>
+                    </div>
+                    <div class="player-card top-player">
+                      <div class="rank-badge">#1</div>
+                      <img src="https://via.placeholder.com/100" alt="Player 1" class="profile-image" />
+                      <div class="card-content">
+                        <div class="player-name">Player 1</div>
+                        <div class="player-winnings">$ 50,000 </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                      </div>
+                    </div>
+                    <div class="player-card">
+                      <div class="rank-badge">#2</div>
+                      <img src="https://via.placeholder.com/100" alt="Player 2" class="profile-image" />
+                      <div class="card-content">
+                        <div class="player-name">Player 2</div>
+                        <div class="player-winnings">$ 20,000 </div>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
+
         </div>
       </div>
     </>

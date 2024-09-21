@@ -4,7 +4,7 @@ import React from "react";
 const HomeHeader = () => {
   return (
     <>
-      <div class="main-home-area">
+      <div >
         <div class="profile-area">
           <div class="media">
             <a href="profile.html" class="thumb">
