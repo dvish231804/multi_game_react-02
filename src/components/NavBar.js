@@ -20,17 +20,17 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <a class="menu-bar" href="my-bet.html">
+              <Link class="menu-bar" to={"/activity"}>
                 <img src="assets/img/icon/svg/ticket.svg" alt="img" />
                 Activities
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="profile.html">
+              <Link to={"/account"}>
                 <img src="assets/img/icon/svg/profile.svg" alt="img" />
                 Account
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
