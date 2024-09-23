@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+// import notification from "../../pages/Notification";
 
 const HomeHeader = () => {
   return (
@@ -7,9 +8,9 @@ const HomeHeader = () => {
       <div class="">
         <div class="profile-area">
           <div class="media">
-            <a href="profile.html" class="thumb">
+            <Link to={'/account'} class="thumb">
               <img src="assets/img/profile.png" alt="img" />
-            </a>
+            </Link>
             <div class="media-body">
               <span class="profile-name">Hello, Devon Lane</span>
               <div class="balance">
@@ -21,10 +22,10 @@ const HomeHeader = () => {
             </div>
           </div>
           <div class="btn-wrap">
-            <a class="icon-btn" href="notification.html">
+            <Link class="icon-btn" to={'/notifications'}>
               <i class="ri-notification-3-line"></i>
               <span class="badge">2</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

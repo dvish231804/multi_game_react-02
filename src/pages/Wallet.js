@@ -6,9 +6,9 @@ const Wallet = () => {
     <>
       <div className="single-page-area">
         <div className="title-area">
-          <a className="btn back-page-btn" href="profile.html">
+          <Link className="btn back-page-btn" to={'/account'}>
             <i className="ri-arrow-left-s-line"></i>
-          </a>
+          </Link>
           <h3 className="ps-4">My Wallet</h3>
         </div>
         <div className="container">

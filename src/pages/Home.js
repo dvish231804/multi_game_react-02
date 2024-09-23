@@ -97,7 +97,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="main-footer-bottom d-block text-center">
+            {/* <div className="main-footer-bottom d-block text-center">
               <ul>
                 <li>
                   <Link className="nav-item" to={'/'}>
@@ -125,7 +125,7 @@ export default function Home() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
 
 
