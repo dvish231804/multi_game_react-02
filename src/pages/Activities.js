@@ -78,6 +78,7 @@ export default function Activities() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
