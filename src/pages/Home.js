@@ -58,7 +58,7 @@ export default function Home() {
             <Card />
             <Card2 />
             <PlayerList />
-            <div class="container">
+            <div className="container">
               <div className="row justify-content-center">
                 <div className="col-12 col-md-8">
                   <h4 className="mb-4 mt-4 text-center">Top-3 Winners</h4>

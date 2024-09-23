@@ -1,0 +1,114 @@
+.main-container {
+    --number-box-bg-color: #987D9A;
+    --number-box-bg-on-active: #EF5A6F;
+    --number-box-text-on-active: rgb(227, 227, 227);
+    --option-btn-bg-color: #694F8E;
+    --option-btn-bg-on-active: rgb(52, 139, 177);
+    --option-btn-text-color: #EECEB9;
+    --option-btn-text-on-active: rgb(227, 227, 227);
+    /* min-height: 100vh; */
+    /* max-width: 100vw; */
+    /* user-select: none; */
+    /* border: 2px solid; */
+    /* display: flex; */
+}
+
+.guess-game-sub-container {
+    border: 2px solid goldenrod;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.game-block {
+    border: 2px solid navy;
+
+}
+
+.number-area {
+    max-width: 32rem;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    border: 2px solid darkcyan;
+}
+
+.number-box {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid green;
+    cursor: pointer;
+    color: #D4BDAC;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* flex-grow: auto !important; */
+    aspect-ratio: 1/1;
+    transition: transform .2s;
+    background-color: var(--number-box-bg-color);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 5px;
+
+}
+
+.number-box:hover {
+    transform: scale(1.1);
+    color: var(--number-box-text-on-active);
+    background-color: var(--number-box-bg-on-active);
+}
+
+.number-box-active {
+    color: var(--number-box-text-on-active);
+
+    background-color: var(--number-box-bg-on-active);
+}
+
+.option-btn {
+    outline: none;
+    font-weight: 500;
+    color: var(--option-btn-text-color);
+    background-color: var(--option-btn-bg-color);
+    border: 1px solid firebrick;
+    padding: 0 !important;
+    border-radius: 10px;
+    width: 2rem;
+}
+
+.option-btn:hover {
+    background-color: var(--option-btn-bg-on-active) !important;
+    color: var(--option-btn-text-on-active) !important;
+}
+
+.btn-active {
+    background-color: var(--option-btn-bg-on-active);
+    color: var(--option-btn-text-on-active);
+}
+
+.play-btn {
+    background-color: var(--option-btn-bg-color);
+    font-weight: 500;
+    color: var(--option-btn-text-color);
+}
+
+.play-btn:hover {
+    background-color: var(--number-box-bg-on-active);
+    color: var(--option-btn-text-on-active);
+
+}
+
+.game-refresh-button {
+    right: 0;
+    top: 17%;
+    border-radius: 50%;
+    color: var(--option-btn-text-color);
+    background-color: var(--option-btn-bg-color);
+}
+
+.game-refresh-button:hover {
+    color: var(--option-btn-text-on-active);
+
+    background-color: var(--number-box-bg-on-active);
+}

@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 const HomeHeader = () => {
   return (
     <>
-      <div class="">
-        <div class="profile-area">
-          <div class="media">
-            <Link to={'/account'} class="thumb">
+      <div className="">
+        <div className="profile-area">
+          <div className="media">
+            <Link to={'/account'} className="thumb">
               <img src="assets/img/profile.png" alt="img" />
             </Link>
-            <div class="media-body">
-              <span class="profile-name">Hello, Devon Lane</span>
-              <div class="balance">
+            <div className="media-body">
+              <span className="profile-name">Hello, Devon Lane</span>
+              <div className="balance">
                 $500
                 <span>
                   <img src="assets/img/icon/dollar-sign.png" alt="img" />
@@ -21,10 +21,10 @@ const HomeHeader = () => {
               </div>
             </div>
           </div>
-          <div class="btn-wrap">
-            <Link class="icon-btn" to={'/notifications'}>
-              <i class="ri-notification-3-line"></i>
-              <span class="badge">2</span>
+          <div className="btn-wrap">
+            <Link className="icon-btn" to={'/notifications'}>
+              <i className="ri-notification-3-line"></i>
+              <span className="badge">2</span>
             </Link>
           </div>
         </div>
