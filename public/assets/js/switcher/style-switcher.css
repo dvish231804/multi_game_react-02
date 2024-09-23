@@ -1,4 +1,4 @@
-.color-panel {
+/* .color-panel {
     display: block;
     height: 230px;
     left: 0;
@@ -108,4 +108,4 @@
 .color-panel ul li.active::before {
     -webkit-transform: scale(1);
     transform: scale(1);
-}
+} */
