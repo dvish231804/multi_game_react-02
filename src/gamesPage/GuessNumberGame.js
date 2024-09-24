@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import "./GuessNumberGame.css"; // Include your CSS
+import "./GuessNumberGame.css";
+import { RotateLoader } from "react-spinners";
 
 const GuessNumberGame = () => {
   const [randomNumbers, setRandomNumbers] = useState([]);
@@ -7,11 +8,18 @@ const GuessNumberGame = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [range1, setRange1] = useState([]);
   const [range2, setRange2] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [resultNumber, setResultNumber] = useState(null);
+  const [isGamePlayed, setIsGamePlayed] = useState(false); // New state
 
   useEffect(() => {
+    document.body.style.padding = "0";
     startGame();
+    return () => {
+      document.body.style.padding = "";
+    };
   }, []);
-  // Function to start the game
+
   const startGame = () => {
     const generatedNumbers = randomNumberGenerator();
     setRandomNumbers(generatedNumbers);
@@ -46,22 +54,26 @@ const GuessNumberGame = () => {
   };
 
   const playGame = () => {
-    if (selectedNumber) {
-      const [result, number] = numberSelectionGame();
-      alert(
-        result
-          ? `You Win! Computer's number = ${number}`
-          : `You Lose! Computer's number = ${number}`
-      );
-    } else if (selectedOption) {
-      const [result, number] = optionSelectionGame();
-      alert(
-        result
-          ? `You Win! Computer's number = ${number}`
-          : `You Lose! Computer's number = ${number}`
-      );
+    if (isGamePlayed) {
+      return; // Prevent playing multiple times without refresh
+    }
+
+    setLoader(true);
+    if (selectedNumber || selectedOption) {
+      setIsGamePlayed(true); // Disable further interaction
+      const [result, number] = selectedNumber
+        ? numberSelectionGame()
+        : optionSelectionGame();
+      setResultNumber(number);
+
+      setTimeout(() => {
+        setLoader(false);
+      }, 1000);
     } else {
       alert("Please select an option!");
+      setTimeout(() => {
+        setLoader(false);
+      }, 1);
     }
   };
 
@@ -79,12 +91,16 @@ const GuessNumberGame = () => {
     } else if (selectedOption === "Odd") {
       return oddSelectionGame(randomNumbers);
     } else {
-      const [rangeMin, rangeMax] = selectedOption.split("-").map(Number);
-      const randomGeneratedNumber = rangeNumberGame(rangeMin, rangeMax);
-      return randomGeneratedNumber >= rangeMin &&
-        randomGeneratedNumber <= rangeMax
-        ? [true, randomGeneratedNumber]
-        : [false, randomGeneratedNumber];
+      const randomGeneratedNumber = rangeNumberGame(range1, range2);
+      const tempRange = selectedOption.split("-").map(Number);
+      if (
+        randomGeneratedNumber >= tempRange[0] &&
+        randomGeneratedNumber <= tempRange[1]
+      ) {
+        return [true, randomGeneratedNumber];
+      } else {
+        return [false, randomGeneratedNumber];
+      }
     }
   };
 
@@ -104,23 +120,70 @@ const GuessNumberGame = () => {
       : [false, randomGeneratedNumber];
   };
 
-  const rangeNumberGame = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const rangeNumberGame = (r1, r2) => {
+    const generateRangeArray = (start, end) => {
+      const arr = [];
+      for (let i = start; i <= end; i++) {
+        arr.push(i);
+      }
+      return arr;
+    };
+
+    const arr1 = generateRangeArray(r1[0], r1[1]);
+    const arr2 = generateRangeArray(r2[0], r2[1]);
+    const finalRangeArray = [...arr1, ...arr2];
+    const findRandomNumber = (arr) => {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      return arr[randomIndex];
+    };
+    const rvalueGenereated = findRandomNumber(finalRangeArray);
+    return rvalueGenereated;
   };
 
   const refreshGame = () => {
+    setResultNumber(null);
+    setLoader(false);
     setSelectedNumber(null);
     setSelectedOption(null);
+    setIsGamePlayed(false); // Re-enable interactions
     startGame();
   };
 
   return (
-    <div className="container-fluid main-container p-0">
+    <div className="container-fluid main-container-Guess-the-number p-0">
       <div className="container-fluid guess-game-sub-container">
         <div className="row">
           <div className="h3 fw-bold mt-2">Guess The Number</div>
         </div>
-        <div className="row mt-2 border border-success">
+
+        <div className="guess-result-box d-flex justify-content-center align-items-center position-relative">
+          {loader ? (
+            <>
+              <div className="loader">
+                <RotateLoader color="rgba(146, 42, 42, 1)" size={20} />
+              </div>
+              <img
+                className="img-fluid"
+                src="/assets/img/banner/qimg0.png"
+                alt="?"
+              />
+            </>
+          ) : (
+            <div>
+              {resultNumber ? (
+                <div className="result-g-number">{resultNumber}</div>
+              ) : (
+                <img
+                  className="img-fluid"
+                  src="/assets/img/banner/qimg0.png"
+                  alt="?"
+                />
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="row mt-2">
           <div className="col game-block container-fluid">
             <div className="number-area col">
               {randomNumbers.map((number, index) => (
@@ -130,9 +193,12 @@ const GuessNumberGame = () => {
                     selectedNumber === number ? "number-box-active" : ""
                   }`}
                   onClick={() => {
-                    setSelectedNumber(number);
-                    setSelectedOption(null);
+                    if (!isGamePlayed) {
+                      setSelectedNumber(number);
+                      setSelectedOption(null);
+                    }
                   }}
+                  style={{ pointerEvents: isGamePlayed ? "none" : "auto" }}
                 >
                   {number}
                 </div>
@@ -147,9 +213,12 @@ const GuessNumberGame = () => {
                     : ""
                 }`}
                 onClick={() => {
-                  setSelectedOption(`${range1[0]}-${range1[1]}`);
-                  setSelectedNumber(null);
+                  if (!isGamePlayed) {
+                    setSelectedOption(`${range1[0]}-${range1[1]}`);
+                    setSelectedNumber(null);
+                  }
                 }}
+                style={{ pointerEvents: isGamePlayed ? "none" : "auto" }} // Disable click after game
               >
                 {range1[0]}-{range1[1]}
               </button>
@@ -158,9 +227,12 @@ const GuessNumberGame = () => {
                   selectedOption === "Even" ? "btn-active" : ""
                 }`}
                 onClick={() => {
-                  setSelectedOption("Even");
-                  setSelectedNumber(null);
+                  if (!isGamePlayed) {
+                    setSelectedOption("Even");
+                    setSelectedNumber(null);
+                  }
                 }}
+                style={{ pointerEvents: isGamePlayed ? "none" : "auto" }} // Disable click after game
               >
                 Even
               </button>
@@ -169,9 +241,12 @@ const GuessNumberGame = () => {
                   selectedOption === "Odd" ? "btn-active" : ""
                 }`}
                 onClick={() => {
-                  setSelectedOption("Odd");
-                  setSelectedNumber(null);
+                  if (!isGamePlayed) {
+                    setSelectedOption("Odd");
+                    setSelectedNumber(null);
+                  }
                 }}
+                style={{ pointerEvents: isGamePlayed ? "none" : "auto" }} // Disable click after game
               >
                 Odd
               </button>
@@ -182,27 +257,38 @@ const GuessNumberGame = () => {
                     : ""
                 }`}
                 onClick={() => {
-                  setSelectedOption(`${range2[0]}-${range2[1]}`);
-                  setSelectedNumber(null);
+                  if (!isGamePlayed) {
+                    setSelectedOption(`${range2[0]}-${range2[1]}`);
+                    setSelectedNumber(null);
+                  }
                 }}
+                style={{ pointerEvents: isGamePlayed ? "none" : "auto" }}
               >
                 {range2[0]}-{range2[1]}
               </button>
             </div>
 
-            <div className="col mt-3 mb-2 d-flex justify-content-center p-2 position-relative">
-              <button
-                className="btn play-btn border p-1 ps-4 pe-4 rounded-2"
-                onClick={playGame}
-              >
-                Play
-              </button>
-              <button
-                className="position-absolute me-4 game-refresh-button restart-btn d-flex justify-content-center align-items-center p-2 btn border"
-                onClick={refreshGame}
-              >
-                <i className="fa-solid fa-rotate-right"></i>
-              </button>
+            <div className="play-button-block d-flex justify-content-center mt-3 gap-2">
+              <button type="button">Add Bet</button>
+
+              {isGamePlayed ? (
+                <button
+                  className="play-guess-btn  p-1 ps-4 pe-4 rounded-2"
+                  onClick={refreshGame}
+                >
+                  Play Again
+                </button>
+              ) : (
+                <button
+                  className="play-guess-btn  p-1 ps-4 pe-4 rounded-2"
+                  onClick={playGame}
+                >
+                  Play
+                </button>
+              )}
+            </div>
+            <div className="balance-guess-game d-flex justify-content-center align-items-center mt-2 fw-bold fs-3">
+              $1000
             </div>
           </div>
         </div>
