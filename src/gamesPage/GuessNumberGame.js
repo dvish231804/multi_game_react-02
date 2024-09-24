@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./GuessNumberGame.css";
 import { RotateLoader } from "react-spinners";
+import BetAmountModal from "../components/gamesmodal/BetAmountModal";
+import WarningMessage from "../components/gamesmodal/WarningMessage";
 
 const GuessNumberGame = () => {
   const [randomNumbers, setRandomNumbers] = useState([]);
@@ -11,6 +13,13 @@ const GuessNumberGame = () => {
   const [loader, setLoader] = useState(false);
   const [resultNumber, setResultNumber] = useState(null);
   const [isGamePlayed, setIsGamePlayed] = useState(false); // New state
+  const [winMessage, setWinMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isWarningOpen, setIsWarningOpen] = useState(false); // Modal state
+  const [warningMessage, setWarningMessage] = useState("");
+  const [walletAmount, setWalletAmount] = useState(100);
+  const [isPlayAccess, setPlayAccess] = useState(false);
+  const [computerSelection, setComputerSelection] = useState(-1);
 
   useEffect(() => {
     document.body.style.padding = "0";
@@ -59,21 +68,65 @@ const GuessNumberGame = () => {
     }
 
     setLoader(true);
+
     if (selectedNumber || selectedOption) {
       setIsGamePlayed(true); // Disable further interaction
-      const [result, number] = selectedNumber
-        ? numberSelectionGame()
-        : optionSelectionGame();
-      setResultNumber(number);
 
-      setTimeout(() => {
-        setLoader(false);
-      }, 1000);
+      if (selectedNumber) {
+        const [result, number] = numberSelectionGame();
+        setResultNumber(number);
+        const index = randomNumbers.indexOf(number);
+        setTimeout(() => {
+          setLoader(false);
+          if (result) {
+            setWinMessage("You Win !");
+          } else {
+            setWinMessage("You Loss !");
+          }
+          setComputerSelection(index);
+        }, 1000);
+      } else if (selectedOption === "Even") {
+        const [result, number] = optionSelectionGame();
+        setResultNumber(number);
+        const index = randomNumbers.indexOf(number);
+        setTimeout(() => {
+          setLoader(false);
+          if (result) {
+            setWinMessage("You Win !");
+          } else {
+            setWinMessage("You Loss !");
+          }
+          setComputerSelection(index);
+        }, 1000);
+      } else if (selectedOption === "Odd") {
+        const [result, number] = optionSelectionGame();
+        setResultNumber(number);
+        const index = randomNumbers.indexOf(number);
+        setTimeout(() => {
+          setLoader(false);
+          if (result) {
+            setWinMessage("You Win !");
+          } else {
+            setWinMessage("You Loss !");
+          }
+          setComputerSelection(index);
+        }, 1000);
+      } else {
+        const [result, number] = optionSelectionGame();
+        setResultNumber(number);
+        setTimeout(() => {
+          setLoader(false);
+          if (result) {
+            setWinMessage("You Win !");
+          } else {
+            setWinMessage("You Loss !");
+          }
+        }, 1000);
+      }
     } else {
-      alert("Please select an option!");
-      setTimeout(() => {
-        setLoader(false);
-      }, 1);
+      setIsWarningOpen(true);
+      setWarningMessage("Please Choose Any Option");
+      setLoader(false);
     }
   };
 
@@ -141,22 +194,54 @@ const GuessNumberGame = () => {
   };
 
   const refreshGame = () => {
+    setComputerSelection(-1);
+    setIsModalOpen(false);
+    setIsWarningOpen(false);
+    setWarningMessage("");
+    setPlayAccess(false);
     setResultNumber(null);
     setLoader(false);
     setSelectedNumber(null);
     setSelectedOption(null);
+    setWinMessage("");
     setIsGamePlayed(false); // Re-enable interactions
     startGame();
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const handleWarningClose = () => {
+    setIsWarningOpen(!isWarningOpen);
+  };
+  const handleWallet = (betAmount) => {
+    if (walletAmount > betAmount) {
+      setWalletAmount(walletAmount - betAmount);
+      setPlayAccess(true);
+    } else {
+      setWarningMessage("Not Sufficient Amount");
+      setIsWarningOpen(true);
+    }
+  };
+
   return (
-    <div className="container-fluid main-container-Guess-the-number p-0">
+    <div className="container-fluid main-container-Guess-the-number p-0 mt-2">
+      <BetAmountModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleWallet}
+      />
+      <WarningMessage
+        isOpen={isWarningOpen}
+        onClose={handleWarningClose}
+        message={warningMessage}
+      />
       <div className="container-fluid guess-game-sub-container">
         <div className="row">
           <div className="h3 fw-bold mt-2">Guess The Number</div>
         </div>
 
-        <div className="guess-result-box d-flex justify-content-center align-items-center position-relative">
+        <div className="guess-result-box d-flex justify-content-center align-items-center position-relative mt-1">
           {loader ? (
             <>
               <div className="loader">
@@ -191,7 +276,7 @@ const GuessNumberGame = () => {
                   key={index}
                   className={`number-box rounded-4 container-fluid m-1 flex-grow-1 ${
                     selectedNumber === number ? "number-box-active" : ""
-                  }`}
+                  } ${computerSelection === index ? "comp-chosen" : ""}`}
                   onClick={() => {
                     if (!isGamePlayed) {
                       setSelectedNumber(number);
@@ -205,7 +290,7 @@ const GuessNumberGame = () => {
               ))}
             </div>
 
-            <div className="buttons-block border col d-flex justify-content-center mt-3 mb-2">
+            <div className="buttons-block col d-flex justify-content-center mt-3 mb-2">
               <button
                 className={`option-btn col ms-2 me-2 ${
                   selectedOption === `${range1[0]}-${range1[1]}`
@@ -269,7 +354,16 @@ const GuessNumberGame = () => {
             </div>
 
             <div className="play-button-block d-flex justify-content-center mt-3 gap-2">
-              <button type="button">Add Bet</button>
+              <button
+                className="rounded-2 add-bet-button-g-number"
+                type="button"
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+                style={{ pointerEvents: isGamePlayed ? "none" : "auto" }}
+              >
+                Add Bet
+              </button>
 
               {isGamePlayed ? (
                 <button
@@ -281,11 +375,21 @@ const GuessNumberGame = () => {
               ) : (
                 <button
                   className="play-guess-btn  p-1 ps-4 pe-4 rounded-2"
-                  onClick={playGame}
+                  onClick={
+                    isPlayAccess
+                      ? playGame
+                      : () => {
+                          setIsWarningOpen(true);
+                          setWarningMessage("Please Add Bet");
+                        }
+                  }
                 >
                   Play
                 </button>
               )}
+            </div>
+            <div className="winnnig-message-g-number d-flex justify-content-center align-items-center fw-semibold mt-2">
+              {winMessage ? winMessage : ""}
             </div>
             <div className="balance-guess-game d-flex justify-content-center align-items-center mt-2 fw-bold fs-3">
               $1000

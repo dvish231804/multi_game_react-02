@@ -8,11 +8,11 @@
     --option-btn-text-on-active: rgb(227, 227, 227);
     --computer-generated-active-number-box: green;
     --number-box-bg-on-active-selection: rgb(94, 210, 45);
+    --add-bet-button-g-number-bg: rgb(240, 126, 5);
     user-select: none;
 }
 
 .guess-game-sub-container {
-    border: 2px solid goldenrod;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,6 +141,19 @@
 
     background-color: var(--number-box-bg-on-active);
 }
+
+.add-bet-button-g-number {
+    font-weight: 500;
+    color: var(--option-btn-text-color);
+    background-color: var(--add-bet-button-g-number-bg);
+}
+
+.comp-chosen {
+    transform: scale(1.1);
+    color: var(--number-box-text-on-active);
+    background-color: var(--computer-generated-active-number-box);
+}
+
 
 @media all and (max-width: 575px) {
     .main-container-Guess-the-number {
