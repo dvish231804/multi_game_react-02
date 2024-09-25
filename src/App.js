@@ -10,6 +10,8 @@ import Wallet from "./pages/Wallet";
 import Withdraw from "./pages/Withdraw";
 import Deposit from "./pages/Deposit";
 import Notification from "./pages/Notification";
+import KYC from "./pages/KYC";
+import TicTacToe from "./components/tic/TicTacToe";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/account/wallet/withdraw" element={<Withdraw />} />
         <Route path="/account/wallet/deposite" element={<Deposit />} />
         <Route path="/notifications" element={<Notification />} />
+        <Route path="/kyc" element={<KYC />} />
+        <Route path="/tic" element={<TicTacToe/>} />
       </Routes>
     </BrowserRouter>
   );
