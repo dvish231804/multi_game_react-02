@@ -4,14 +4,14 @@ import ActivityCard from "../components/activitypagecomponents/ActivityCard";
 
 export default function Activities() {
   return (
-    <div class="single-page-area">
+    <div className="single-page-area">
       <ActivityHeader />
-      <div class="mybet-page-wrap">
-        <div class="container mt-4">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item col-6" role="presentation">
+      <div className="mybet-page-wrap">
+        <div className="container mt-4">
+          <ul className="nav nav-tabs" id="myTab" role="tablist">
+            <li className="nav-item col-6" role="presentation">
               <button
-                class="nav-link active"
+                className="nav-link active"
                 id="home-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#home"
@@ -23,9 +23,9 @@ export default function Activities() {
                 Today
               </button>
             </li>
-            <li class="nav-item col-6" role="presentation">
+            <li className="nav-item col-6" role="presentation">
               <button
-                class="nav-link"
+                className="nav-link"
                 id="lose-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#lose"
@@ -38,11 +38,11 @@ export default function Activities() {
               </button>
             </li>
           </ul>
-          <div class="tab-content" id="myTabContent">
+          <div className="tab-content" id="myTabContent">
             {/* <!-- Content for Today tab --> */}
 
             <div
-              class="tab-pane fade show active"
+              className="tab-pane fade show active"
               id="home"
               role="tabpanel"
               aria-labelledby="home-tab"
@@ -61,7 +61,7 @@ export default function Activities() {
             {/* <!-- Content for prvious tab --> */}
 
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="lose"
               role="tabpanel"
               aria-labelledby="lose-tab"
