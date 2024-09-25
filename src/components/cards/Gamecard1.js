@@ -12,8 +12,8 @@ export default function Gamecard1() {
                             <div class="card-body p-4">
                                 <img src="assets/img/banner/tic.jpg" class="img-fluid" alt="Fishing Image" />
                                 <h5 class="card-title mt-3">Tic-Tac-toe</h5>
-                                <button class="sport_button " >PLAY NOW</button>
-                                <Link to={'/tic'}>playnow
+                                <Link to={'/tic'}>
+                                    <button class="sport_button " >PLAY NOW</button>
                                 </Link>
                                 {/* <!-- <p class="card-text">Explore the world of fishing.</p> --> */}
                             </div>
