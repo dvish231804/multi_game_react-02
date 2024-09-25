@@ -35,10 +35,10 @@ export default function Accounts() {
               </Link>
             </li>
             <li>
-              <a className="single-profile-wrap" href="kyc-form.html">
+              <Link className="single-profile-wrap" to={'/kyc'}>
                 <i className="fa fa-cubes"></i> Kyc
                 <i className="ri-arrow-right-s-line"></i>
-              </a>
+              </Link>
             </li>
             <li>
               <div className="single-profile-wrap">
@@ -53,29 +53,29 @@ export default function Accounts() {
               </div>
             </li>
             <li>
-              <a className="single-profile-wrap" href="invite.html">
+              <Link className="single-profile-wrap" href="invite.html">
                 <i className="fas fa-users"></i> Invite
                 <i className="ri-arrow-right-s-line"></i>
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="single-profile-wrap" href="change-pass.html">
+              <Link className="single-profile-wrap" href="change-pass.html">
                 <i className="fas fa-lock"></i> Change Password
                 <i className="ri-arrow-right-s-line"></i>
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="single-profile-wrap" href="term-condition.html">
+              <Link className="single-profile-wrap" href="term-condition.html">
                 <i className="fas fa-exclamation-triangle"></i>Terms &
                 Conditions
                 <i className="ri-arrow-right-s-line"></i>
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="single-profile-wrap" href="login.html">
+              <Link className="single-profile-wrap" href="login.html">
                 <i className="fas fa-sign-out-alt"></i>Log Out
                 <i className="ri-arrow-right-s-line"></i>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

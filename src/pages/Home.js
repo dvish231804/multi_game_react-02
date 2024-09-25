@@ -3,7 +3,7 @@ import HomeHeader from "../components/Header/HomeHeader";
 import Card from "../components/cards/Card";
 import Card2 from "../components/cards/Card2";
 import PlayerList from "../components/Homelist/PlayerList";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import Colors from "../components/color";
 
 export default function Home() {
